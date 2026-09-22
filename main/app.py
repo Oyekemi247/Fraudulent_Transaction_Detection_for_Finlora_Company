@@ -40,7 +40,7 @@ async def startup_event():
             historical_data = None
 
 ## what the API is expecting from the user as an input
-class TransactionData("BaseModel"):
+class TransactionData(BaseModel):
     timestamp: str
     customer_id: str
     home_country: str 
@@ -80,7 +80,7 @@ async def predict(transaction:TransactionData):
         raise HTTPException(status_code = 500, detail = "historical data has not been loaded")
 
     try:
-        input_data = transaction.to_dict()
+        input_data = transaction.dict()
 
         prediction, prediction_probability = predict_transaction(model, input_data)
 
